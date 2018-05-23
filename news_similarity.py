@@ -21,15 +21,17 @@ def load_1h_news():
 
     # 数据库通过时间范围查询获取一小时的新闻纪录放入all_doc[timestamp+title+content,]
     # 测试代码，使用../data/news0312.csv作为一小时时间窗口的历史新闻数据
-    file_data = pd.read_csv('/data/jupyter/stock/data/news0312.csv')
-    ws = word_segmentation.WordSegmentation()
+    ts = '1526458569'
     
-    for index, row in file_data.iterrows():
-        row_words = ws.word_segmentation(str(row.title) + str(row.content))
-        news_ts = row.time
-        all_doc_list.append(row_words)
-        all_timestamp_list.append(news_ts)
+    with open('/data/jupyter/stock/data/news_init.csv', 'r', encoding='utf-8') as data:
+        for line in data:
+            row_words = line.replace('\n', '').split(',')
+            news_ts = ts
+            ts = str(int(ts) + 1)
+            all_doc_list.append(row_words)
+            all_timestamp_list.append(news_ts)
     print("load 1h news success")
+    print(all_timestamp_list)
 
     return all_doc_list, all_timestamp_list
 
@@ -77,11 +79,11 @@ class NewsSimilarity(object):
         """
         定时（每小时）删除all_doc_list里前一小时的新闻数据
         """
-        time_flag = time.time() - 3600
+        time_flag = int(self.__all_timestamp_list[-1]) - 3600
 
         index = 0
         for ts in self.__all_timestamp_list:
-            if float(ts) >= time_flag:
+            if int(ts) >= time_flag:
                 del_news = index
                 break
             else:
@@ -109,7 +111,7 @@ if __name__ == "__main__":
     # 新闻分词
     ws = word_segmentation.WordSegmentation()
     news_seg = ws.word_segmentation(str_title_content)
-    news_timestamp = '1525682235'
+    news_timestamp = '1526440057'
     print("分词结果：")
     print(news_seg)
 
