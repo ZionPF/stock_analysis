@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[2]:
 
 
 import json
@@ -36,10 +36,11 @@ def getLabels():
     print("time:",str_time)
     print("title:",str_title)
     news_seg = WordSegmentation.word_segmentation(str_title + str_content)
+    content_seg = WordSegmentation.word_segmentation(str_content)
 #     print(news_seg)
     str_code_list = ExtractStockCode.extract_stock_code(news_seg)
     print("include stock:",str_code_list)
-    repeat = NewsSimilarity.news_similarity(news_seg)
+    repeat = NewsSimilarity.news_similarity(content_seg)
     print("If repeat:",repeat)
     NewsSimilarity.add_news(str_time, news_seg)
     code_list = str_code_list.split(',')
