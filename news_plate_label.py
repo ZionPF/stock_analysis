@@ -92,7 +92,7 @@ class PlateLabel():
               
         if len(label_list) == 1:
             with open(STOCK_TRDATA_PATH, 'a', encoding = 'utf-8') as stock_tr_data:
-                stock_tr_data.writelines(' '.join(news_words_list) +  ',' + labels[0] + '\n')
+                stock_tr_data.writelines(' '.join(news_words_list) +  ',' + label_list[0] + '\n')
         if len(label_list) <= 3:
             return label_list
         else:
