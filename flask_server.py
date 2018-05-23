@@ -63,6 +63,7 @@ def getLabels():
     str_code_forcast = ",".join([str(x) for x in stock_forcast])
     str_stock_forcast = utils.code_to_stock(str_code_forcast)
     print("forcasted stocks:",stock_forcast)
+    print("forcasted stocks_code:",str_stock_forcast)
     dic_output = dict(stock_code = str_stock_list, repeat = repeat, plate = plate_string, stock_forcast = str_stock_forcast)
     json_output = json.dumps(dic_output)
     return json_output
