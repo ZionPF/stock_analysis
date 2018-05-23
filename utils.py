@@ -8,7 +8,7 @@ def code_to_stock(str_code_list):
     code_list = str_code_list.split(',')
     stock_list = []
     for code in code_list:
-        stock = dict_code[code]
+        stock = dict_code.get(code)
         code_stock = code + '(' + stock + ')'
         stock_list.append(code_stock)
     
