@@ -61,7 +61,7 @@ class NewsSimilarity(object):
         print("similarity success")
 
         # 如果有相似度在90%以上的文档存在，即将新推送的新闻标记为1，否则0
-        repeat = 1 if sim.max(axis=0) >= 0.95 else 0
+        repeat = 1 if sim.max(axis=0) >= 0.93 else 0
 
         return repeat
 
