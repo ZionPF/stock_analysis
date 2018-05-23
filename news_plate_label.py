@@ -88,6 +88,7 @@ class PlateLabel():
             if i not in label_list:
                 label_list.append(i)
         if predict_label not in label_list:
+            label_list = label_list[:2]
             label_list.append(predict_label)
               
         if len(in_labels) == 1:
@@ -133,10 +134,6 @@ class PlateLabel():
         if len(plate_list)>0:
             stocks += self.plate_stock_data[self.plate_stock_data.plate == plate_list[0]].stock.tolist()
         return stocks
-
-
-# In[2]:
-
 
 if __name__ == "__main__":
     time_start = time.time()

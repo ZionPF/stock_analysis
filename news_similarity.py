@@ -31,7 +31,6 @@ def load_1h_news():
             all_doc_list.append(row_words)
             all_timestamp_list.append(news_ts)
     print("load 1h news success")
-    print(all_timestamp_list)
 
     return all_doc_list, all_timestamp_list
 

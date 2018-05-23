@@ -7,6 +7,7 @@
 import json
 from flask import Flask
 from flask import request
+import utils
 import word_segmentation as ws
 import news_similarity as ns
 import extract_stock_code as esc
@@ -39,6 +40,7 @@ def getLabels():
     content_seg = WordSegmentation.word_segmentation(str_content)
 #     print(news_seg)
     str_code_list = ExtractStockCode.extract_stock_code(news_seg)
+    str_stock_list = utils.code_to_stock(str_code_list)
     print("include stock:",str_code_list)
     repeat = NewsSimilarity.news_similarity(content_seg)
     print("If repeat:",repeat)
@@ -58,9 +60,10 @@ def getLabels():
     print("forcasted plates:",plate_label)
     
     stock_forcast = NewsPlateLabel.stock_forcast(plate_label)
-    stock_forcast_str = ",".join([str(x) for x in stock_forcast])
+    str_code_forcast = ",".join([str(x) for x in stock_forcast])
+    str_stock_forcast = utils.code_to_stock(str_code_forcast)
     print("forcasted stocks:",stock_forcast)
-    dic_output = dict(stock_code = str_code_list, repeat = repeat, plate = plate_string, stock_forcast = stock_forcast_str)
+    dic_output = dict(stock_code = str_stock_list, repeat = repeat, plate = plate_string, stock_forcast = str_stock_forcast)
     json_output = json.dumps(dic_output)
     return json_output
 

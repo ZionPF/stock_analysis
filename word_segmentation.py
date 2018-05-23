@@ -6,6 +6,7 @@
 
 import jieba
 import unicodedata
+import utils
 
 
 def stop_words_list():
@@ -18,24 +19,6 @@ def stop_words_list():
     temp_stop_list = ['\u3000', '\xa0', '\t']
     stop_words = stopwords + temp_stop_list
     return stop_words
-
-
-def stock_code_dict():
-    # 股票及股票代码表
-    data_path = '/data/jupyter/stock/data/stock_list.csv'
-
-    stock_name = []  # 提取出的股票名
-    stock_code = []  # 提取出的股票代码
-
-    with open(data_path, 'r', encoding='utf-8') as data:
-        for line in data:
-            stock_name.append(line[0:-9])
-            stock_code.append(line[-8:-2])
-
-    dict_code = dict(zip(stock_code, stock_name))
-
-    return dict_code
-
 
 def is_number(s):
     # 判断是否为数字
@@ -55,7 +38,7 @@ def is_number(s):
 class WordSegmentation(object):
 
     def __init__(self):
-        self.dict_code = stock_code_dict()
+        self.dict_code = utils.stock_code_dict()
         self.stopword_list = stop_words_list()
 
     def word_segmentation(self, str_title_content):
